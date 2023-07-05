@@ -9,6 +9,12 @@ import gtfsStopTimes from './routes/stopTimes.routes.js'
 import gtfsStop from './routes/stops.routes.js'
 import { PORT } from "./config.js";
 import { dbConfig } from "./db.js";
+import cors from 'cors';
+const app = express();
+
+// Habilitar CORS para todas las rutas
+app.use(cors());
+
 
 // Establecer la conexión con la base de datos
 sql.connect(dbConfig)
@@ -18,7 +24,6 @@ sql.connect(dbConfig)
   .catch((error) => {
     console.error('Error al conectar a la base de datos:', error);
   });
-const app = express();
 
 app.use(gtfsRoutes)
 app.use(gtfsAgency)
